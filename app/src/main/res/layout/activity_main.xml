@@ -11,9 +11,9 @@
     tools:context="com.example.android.habittracker.MainActivity">
 
     <TextView
+        android:id="@+id/text_view_database_number"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:layout_height="wrap_content" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"

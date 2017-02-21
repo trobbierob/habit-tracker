@@ -23,7 +23,10 @@ public class HabitDbHelper extends SQLiteOpenHelper {
             + HabitEntry.TABLE_NAME + " (" + HabitEntry._ID
             + " INTEGER PRIMARY KEY AUTOINCREMENT"
             + COMMA_SEP + HabitEntry.COLUMN_HABIT_NAME
-            + TEXT_TYPE_NOT_NULL + ")";
+            + TEXT_TYPE + COMMA_SEP
+            + HabitEntry.COLUMN_THING_1 + TEXT_TYPE + COMMA_SEP
+            + HabitEntry.COLUMN_THING_2 + TEXT_TYPE + COMMA_SEP
+            + HabitEntry.COLUMN_THING_3 + TEXT_TYPE + ")";
 
     public HabitDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -32,11 +35,11 @@ public class HabitDbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(SQL_CREATE_ENTRIES);
-        onCreate(db);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        onUpgrade(db, oldVersion, newVersion);
+        db.execSQL(SQL_CREATE_ENTRIES);
+        onCreate(db);
     }
 }
