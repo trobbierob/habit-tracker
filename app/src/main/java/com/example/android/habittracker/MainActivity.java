@@ -11,9 +11,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.android.habittracker.data.HabitContract.HabitEntry;
 import com.example.android.habittracker.data.HabitDbHelper;
+
+import es.dmoral.toasty.Toasty;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,10 +50,37 @@ public class MainActivity extends AppCompatActivity {
     private void displayDatabaseInfo() {
 
         SQLiteDatabase db = mDbHelper.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + HabitEntry.TABLE_NAME, null);
+
+        String[] projection ={
+                HabitEntry._ID,
+                HabitEntry.COLUMN_HABIT_NAME};
+
+        Cursor cursor = db.query(HabitEntry.TABLE_NAME,
+                projection,
+                null,
+                null,
+                null,
+                null,
+                null);
+
+        TextView displayView = (TextView) findViewById(R.id.text_view_database_number);
+
         try {
-            TextView displayView = (TextView) findViewById(R.id.text_view_database_number);
-            displayView.setText("Number of rows in database table: " + cursor.getCount());
+            displayView.setText("Number of rows in database table: " + cursor.getCount() + "\n\n");
+            displayView.append(HabitEntry._ID + "x"
+                            + HabitEntry.COLUMN_HABIT_NAME);
+
+            int idColumnIndex = cursor.getColumnIndex(HabitEntry._ID);
+            int nameColumnIndex = cursor.getColumnIndex(HabitEntry.COLUMN_HABIT_NAME);
+
+            while (cursor.moveToNext()) {
+                int currentID = cursor.getInt(idColumnIndex);
+                String currentName = cursor.getString(nameColumnIndex);
+
+                displayView.append("\n" + currentID + " x "
+                                    + currentName);
+
+            }
 
         } finally {
             cursor.close();
@@ -58,14 +88,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void dummyData() {
+
         SQLiteDatabase db = mDbHelper.getWritableDatabase();
+
         ContentValues values = new ContentValues();
         values.put(HabitEntry.COLUMN_HABIT_NAME, "Feed Turtles");
-        values.put(HabitEntry.COLUMN_THING_1, "Daily");
-        values.put(HabitEntry.COLUMN_THING_2, "Weekly");
-        values.put(HabitEntry.COLUMN_THING_3, "Yearly");
 
-        long newRowId = db.insert(HabitEntry.TABLE_NAME, null, values);
+        db.insert(HabitEntry.TABLE_NAME, null, values);
+
+        Toasty.success(MainActivity.this, "Row Added!", Toast.LENGTH_SHORT, true).show();
     }
 
     @Override
