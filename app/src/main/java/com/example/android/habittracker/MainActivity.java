@@ -16,6 +16,8 @@ import android.widget.Toast;
 import com.example.android.habittracker.data.HabitContract.HabitEntry;
 import com.example.android.habittracker.data.HabitDbHelper;
 
+import java.util.Random;
+
 import es.dmoral.toasty.Toasty;
 
 public class MainActivity extends AppCompatActivity {
@@ -92,11 +94,74 @@ public class MainActivity extends AppCompatActivity {
         SQLiteDatabase db = mDbHelper.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(HabitEntry.COLUMN_HABIT_NAME, "Feed Turtles");
+        Random rand = new Random();
+        int num = rand.nextInt(12);
 
-        db.insert(HabitEntry.TABLE_NAME, null, values);
-
-        Toasty.success(MainActivity.this, "Row Added!", Toast.LENGTH_SHORT, true).show();
+        switch (num) {
+            case 0:
+                values.put(HabitEntry.COLUMN_HABIT_NAME, "Fire someone");
+                db.insert(HabitEntry.TABLE_NAME, null, values);
+                Toasty.success(MainActivity.this, "Row Added!", Toast.LENGTH_SHORT, true).show();
+                break;
+            case 1:
+                values.put(HabitEntry.COLUMN_HABIT_NAME, "Stay up late to feed chickens");
+                db.insert(HabitEntry.TABLE_NAME, null, values);
+                Toasty.success(MainActivity.this, "Row Added!", Toast.LENGTH_SHORT, true).show();
+                break;
+            case 2:
+                values.put(HabitEntry.COLUMN_HABIT_NAME, "Make Dinner");
+                db.insert(HabitEntry.TABLE_NAME, null, values);
+                Toasty.success(MainActivity.this, "Row Added!", Toast.LENGTH_SHORT, true).show();
+                break;
+            case 3:
+                values.put(HabitEntry.COLUMN_HABIT_NAME, "Don't die");
+                db.insert(HabitEntry.TABLE_NAME, null, values);
+                Toasty.success(MainActivity.this, "Row Added!", Toast.LENGTH_SHORT, true).show();
+                break;
+            case 4:
+                values.put(HabitEntry.COLUMN_HABIT_NAME, "Take chill pill");
+                db.insert(HabitEntry.TABLE_NAME, null, values);
+                Toasty.success(MainActivity.this, "Row Added!", Toast.LENGTH_SHORT, true).show();
+                break;
+            case 5:
+                values.put(HabitEntry.COLUMN_HABIT_NAME, "Barter organs");
+                db.insert(HabitEntry.TABLE_NAME, null, values);
+                Toasty.success(MainActivity.this, "Row Added!", Toast.LENGTH_SHORT, true).show();
+                break;
+            case 6:
+                values.put(HabitEntry.COLUMN_HABIT_NAME, "Skip lunch");
+                db.insert(HabitEntry.TABLE_NAME, null, values);
+                Toasty.success(MainActivity.this, "Row Added!", Toast.LENGTH_SHORT, true).show();
+                break;
+            case 7:
+                values.put(HabitEntry.COLUMN_HABIT_NAME, "Read gossip column");
+                db.insert(HabitEntry.TABLE_NAME, null, values);
+                Toasty.success(MainActivity.this, "Row Added!", Toast.LENGTH_SHORT, true).show();
+                break;
+            case 8:
+                values.put(HabitEntry.COLUMN_HABIT_NAME, "Spend money");
+                db.insert(HabitEntry.TABLE_NAME, null, values);
+                Toasty.success(MainActivity.this, "Row Added!", Toast.LENGTH_SHORT, true).show();
+                break;
+            case 9:
+                values.put(HabitEntry.COLUMN_HABIT_NAME, "Ask for a hug");
+                db.insert(HabitEntry.TABLE_NAME, null, values);
+                Toasty.success(MainActivity.this, "Row Added!", Toast.LENGTH_SHORT, true).show();
+                break;
+            case 10:
+                values.put(HabitEntry.COLUMN_HABIT_NAME, "Take 'No' for an answer");
+                db.insert(HabitEntry.TABLE_NAME, null, values);
+                Toasty.success(MainActivity.this, "Row Added!", Toast.LENGTH_SHORT, true).show();
+                break;
+            case 11:
+                values.put(HabitEntry.COLUMN_HABIT_NAME, "Laugh");
+                db.insert(HabitEntry.TABLE_NAME, null, values);
+                Toasty.success(MainActivity.this, "Row Added!", Toast.LENGTH_SHORT, true).show();
+                break;
+            default:
+                Toasty.error(MainActivity.this, "No Row Added!", Toast.LENGTH_SHORT, true).show();
+                break;
+        }
     }
 
     @Override
