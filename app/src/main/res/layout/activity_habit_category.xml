@@ -10,10 +10,10 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.android.habittracker.HabitCategory">
 
-    <TextView
-        android:id="@+id/coding"
+    <EditText
+        android:id="@+id/habit_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Coding"/>
+        android:hint="Add Habit Here"/>
 
 </RelativeLayout>

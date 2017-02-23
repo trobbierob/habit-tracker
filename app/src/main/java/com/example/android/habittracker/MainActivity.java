@@ -81,7 +81,6 @@ public class MainActivity extends AppCompatActivity {
 
                 displayView.append("\n" + currentID + " x "
                                     + currentName);
-
             }
 
         } finally {
@@ -89,6 +88,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     *  dummyData method provides sample habits for users
+     */
     private void dummyData() {
 
         SQLiteDatabase db = mDbHelper.getWritableDatabase();
@@ -164,12 +166,20 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * @param menu
+     * Method inflates overflow menu
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
         return true;
     }
 
+    /**
+     * @param item
+     * Method calls dummyData method to insert fake data rows
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
