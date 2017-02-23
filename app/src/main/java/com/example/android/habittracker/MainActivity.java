@@ -23,6 +23,7 @@ import es.dmoral.toasty.Toasty;
 public class MainActivity extends AppCompatActivity {
 
     private HabitDbHelper mDbHelper;
+    int count = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +72,8 @@ public class MainActivity extends AppCompatActivity {
             displayView.setText("Number of rows in database table: " + cursor.getCount() + "\n\n");
             displayView.append(HabitEntry._ID + "x"
                             + HabitEntry.COLUMN_HABIT_NAME);
+
+            count = cursor.getCount();
 
             int idColumnIndex = cursor.getColumnIndex(HabitEntry._ID);
             int nameColumnIndex = cursor.getColumnIndex(HabitEntry.COLUMN_HABIT_NAME);
@@ -166,6 +169,16 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void delete() {
+        SQLiteDatabase db = mDbHelper.getWritableDatabase();
+
+        if (count == 0) {
+            Toasty.error(MainActivity.this, "Nothing to Delete", Toast.LENGTH_SHORT).show();
+        } else {
+            db.delete(HabitEntry.TABLE_NAME, null, null);
+        }
+    }
+
     /**
      * @param menu
      * Method inflates overflow menu
@@ -185,6 +198,10 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.action_insert_dummy_data:
                 dummyData();
+                displayDatabaseInfo();
+                return true;
+            case R.id.action_delete:
+                delete();
                 displayDatabaseInfo();
                 return true;
         }
