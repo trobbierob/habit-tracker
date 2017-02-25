@@ -24,9 +24,11 @@ public class HabitCreator extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_habit_category);
+        setContentView(R.layout.activity_habit_creator);
 
         ButterKnife.bind(this);
+
+
     }
 
     private void insertHabit() {
