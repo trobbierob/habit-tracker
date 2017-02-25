@@ -15,8 +15,8 @@ public final class HabitContract {
         public static final String TABLE_NAME = "habits";
         public static final String _ID = BaseColumns._ID;
         public static final String COLUMN_HABIT_NAME = "task";
+        public static final String COLUMN_DAYS = "days";
 
-        public static final String COLUMN_THING_1 = "time";
         public static final String COLUMN_THING_2 = "thing_2";
         public static final String COLUMN_THING_3 = "thing_3";
     }

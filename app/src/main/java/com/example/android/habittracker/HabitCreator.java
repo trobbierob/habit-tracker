@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -20,6 +21,13 @@ import es.dmoral.toasty.Toasty;
 public class HabitCreator extends AppCompatActivity {
 
     @BindView(R.id.habit_edit_text) EditText mHabitEditText;
+    @BindView(R.id.cb_sunday) CheckBox mCbSunday;
+    @BindView(R.id.cb_monday) CheckBox mCbMonday;
+    @BindView(R.id.cb_tuesday) CheckBox mCbTuesday;
+    @BindView(R.id.cb_wednesday) CheckBox mCbWednesday;
+    @BindView(R.id.cb_thursday) CheckBox mCbThursday;
+    @BindView(R.id.cb_friday) CheckBox mCbFriday;
+    @BindView(R.id.cb_saturday) CheckBox mCbSaturday;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,8 +35,6 @@ public class HabitCreator extends AppCompatActivity {
         setContentView(R.layout.activity_habit_creator);
 
         ButterKnife.bind(this);
-
-
     }
 
     private void insertHabit() {

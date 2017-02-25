@@ -56,7 +56,8 @@ public class MainActivity extends AppCompatActivity {
 
         String[] projection ={
                 HabitEntry._ID,
-                HabitEntry.COLUMN_HABIT_NAME};
+                HabitEntry.COLUMN_HABIT_NAME,
+                HabitEntry.COLUMN_DAYS};
 
         Cursor cursor = db.query(HabitEntry.TABLE_NAME,
                 projection,
@@ -71,19 +72,21 @@ public class MainActivity extends AppCompatActivity {
         try {
             displayView.setText("Number of rows in database table: " + cursor.getCount() + "\n\n");
             displayView.append(HabitEntry._ID + "x"
-                            + HabitEntry.COLUMN_HABIT_NAME);
+                            + HabitEntry.COLUMN_HABIT_NAME + "x" + HabitEntry.COLUMN_DAYS);
 
             count = cursor.getCount();
 
             int idColumnIndex = cursor.getColumnIndex(HabitEntry._ID);
             int nameColumnIndex = cursor.getColumnIndex(HabitEntry.COLUMN_HABIT_NAME);
+            int dayColumnIndex = cursor.getColumnIndex(HabitEntry.COLUMN_DAYS);
 
             while (cursor.moveToNext()) {
                 int currentID = cursor.getInt(idColumnIndex);
                 String currentName = cursor.getString(nameColumnIndex);
+                int currentDayAmount = cursor.getInt(dayColumnIndex);
 
                 displayView.append("\n" + currentID + " x "
-                                    + currentName);
+                                    + currentName + " x " + currentDayAmount);
             }
 
         } finally {
@@ -100,11 +103,13 @@ public class MainActivity extends AppCompatActivity {
 
         ContentValues values = new ContentValues();
         Random rand = new Random();
-        int num = rand.nextInt(12);
+        int num = 0;
+        //int num = rand.nextInt(12);
 
         switch (num) {
             case 0:
                 values.put(HabitEntry.COLUMN_HABIT_NAME, "Fire someone");
+                values.put(HabitEntry.COLUMN_DAYS, 17);
                 db.insert(HabitEntry.TABLE_NAME, null, values);
                 Toasty.success(MainActivity.this, "Row Added!", Toast.LENGTH_SHORT, true).show();
                 break;
@@ -120,11 +125,13 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case 3:
                 values.put(HabitEntry.COLUMN_HABIT_NAME, "Don't die");
+                values.put(HabitEntry.COLUMN_DAYS, 17);
                 db.insert(HabitEntry.TABLE_NAME, null, values);
                 Toasty.success(MainActivity.this, "Row Added!", Toast.LENGTH_SHORT, true).show();
                 break;
             case 4:
                 values.put(HabitEntry.COLUMN_HABIT_NAME, "Take chill pill");
+                values.put(HabitEntry.COLUMN_DAYS, 17);
                 db.insert(HabitEntry.TABLE_NAME, null, values);
                 Toasty.success(MainActivity.this, "Row Added!", Toast.LENGTH_SHORT, true).show();
                 break;
