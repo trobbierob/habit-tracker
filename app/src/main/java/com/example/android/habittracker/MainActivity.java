@@ -71,8 +71,8 @@ public class MainActivity extends AppCompatActivity {
 
         try {
             displayView.setText("Number of rows in database table: " + cursor.getCount() + "\n\n");
-            displayView.append(HabitEntry._ID + "x"
-                            + HabitEntry.COLUMN_HABIT_NAME + "x" + HabitEntry.COLUMN_DAYS);
+            displayView.append(HabitEntry._ID + "   x   "
+                            + HabitEntry.COLUMN_HABIT_NAME + "   x   " + HabitEntry.COLUMN_DAYS);
 
             count = cursor.getCount();
 
@@ -85,8 +85,8 @@ public class MainActivity extends AppCompatActivity {
                 String currentName = cursor.getString(nameColumnIndex);
                 int currentDayAmount = cursor.getInt(dayColumnIndex);
 
-                displayView.append("\n" + currentID + " x "
-                                    + currentName + " x " + currentDayAmount);
+                displayView.append("\n" + currentID + "   x   "
+                                    + currentName + "   x   " + currentDayAmount);
             }
 
         } finally {
@@ -103,35 +103,36 @@ public class MainActivity extends AppCompatActivity {
 
         ContentValues values = new ContentValues();
         Random rand = new Random();
-        int num = 0;
-        //int num = rand.nextInt(12);
+        int num = rand.nextInt(12);
 
         switch (num) {
             case 0:
                 values.put(HabitEntry.COLUMN_HABIT_NAME, "Fire someone");
-                values.put(HabitEntry.COLUMN_DAYS, 17);
+                values.put(HabitEntry.COLUMN_DAYS, 1);
                 db.insert(HabitEntry.TABLE_NAME, null, values);
                 Toasty.success(MainActivity.this, "Row Added!", Toast.LENGTH_SHORT, true).show();
                 break;
             case 1:
                 values.put(HabitEntry.COLUMN_HABIT_NAME, "Stay up late to feed chickens");
+                values.put(HabitEntry.COLUMN_DAYS, 2);
                 db.insert(HabitEntry.TABLE_NAME, null, values);
                 Toasty.success(MainActivity.this, "Row Added!", Toast.LENGTH_SHORT, true).show();
                 break;
             case 2:
                 values.put(HabitEntry.COLUMN_HABIT_NAME, "Make Dinner");
+                values.put(HabitEntry.COLUMN_DAYS, 7);
                 db.insert(HabitEntry.TABLE_NAME, null, values);
                 Toasty.success(MainActivity.this, "Row Added!", Toast.LENGTH_SHORT, true).show();
                 break;
             case 3:
                 values.put(HabitEntry.COLUMN_HABIT_NAME, "Don't die");
-                values.put(HabitEntry.COLUMN_DAYS, 17);
+                values.put(HabitEntry.COLUMN_DAYS, 7);
                 db.insert(HabitEntry.TABLE_NAME, null, values);
                 Toasty.success(MainActivity.this, "Row Added!", Toast.LENGTH_SHORT, true).show();
                 break;
             case 4:
                 values.put(HabitEntry.COLUMN_HABIT_NAME, "Take chill pill");
-                values.put(HabitEntry.COLUMN_DAYS, 17);
+                values.put(HabitEntry.COLUMN_DAYS, 7);
                 db.insert(HabitEntry.TABLE_NAME, null, values);
                 Toasty.success(MainActivity.this, "Row Added!", Toast.LENGTH_SHORT, true).show();
                 break;
@@ -147,26 +148,31 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case 7:
                 values.put(HabitEntry.COLUMN_HABIT_NAME, "Read gossip column");
+                values.put(HabitEntry.COLUMN_DAYS, 7);
                 db.insert(HabitEntry.TABLE_NAME, null, values);
                 Toasty.success(MainActivity.this, "Row Added!", Toast.LENGTH_SHORT, true).show();
                 break;
             case 8:
                 values.put(HabitEntry.COLUMN_HABIT_NAME, "Spend money");
+                values.put(HabitEntry.COLUMN_DAYS, 4);
                 db.insert(HabitEntry.TABLE_NAME, null, values);
                 Toasty.success(MainActivity.this, "Row Added!", Toast.LENGTH_SHORT, true).show();
                 break;
             case 9:
                 values.put(HabitEntry.COLUMN_HABIT_NAME, "Ask for a hug");
+                values.put(HabitEntry.COLUMN_DAYS, 1);
                 db.insert(HabitEntry.TABLE_NAME, null, values);
                 Toasty.success(MainActivity.this, "Row Added!", Toast.LENGTH_SHORT, true).show();
                 break;
             case 10:
                 values.put(HabitEntry.COLUMN_HABIT_NAME, "Take 'No' for an answer");
+                values.put(HabitEntry.COLUMN_DAYS, 3);
                 db.insert(HabitEntry.TABLE_NAME, null, values);
                 Toasty.success(MainActivity.this, "Row Added!", Toast.LENGTH_SHORT, true).show();
                 break;
             case 11:
                 values.put(HabitEntry.COLUMN_HABIT_NAME, "Laugh");
+                values.put(HabitEntry.COLUMN_DAYS, 7);
                 db.insert(HabitEntry.TABLE_NAME, null, values);
                 Toasty.success(MainActivity.this, "Row Added!", Toast.LENGTH_SHORT, true).show();
                 break;
