@@ -7,10 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.android.habittracker.data.HabitContract;
 import com.example.android.habittracker.data.HabitContract.HabitEntry;
 import com.example.android.habittracker.data.HabitDbHelper;
 
@@ -29,12 +29,69 @@ public class HabitCreator extends AppCompatActivity {
     @BindView(R.id.cb_friday) CheckBox mCbFriday;
     @BindView(R.id.cb_saturday) CheckBox mCbSaturday;
 
+    private int sunInt = 0;
+    private int monInt = 0;
+    private int tuesInt = 0;
+    private int wedInt = 0;
+    private int thursInt = 0;
+    private int friInt = 0;
+    private int satInt = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_habit_creator);
 
         ButterKnife.bind(this);
+
+        mCbSunday.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
+                sunInt = 1;
+            }
+        });
+
+        mCbMonday.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
+                monInt = 1;
+            }
+        });
+
+        mCbTuesday.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
+                tuesInt = 1;
+            }
+        });
+
+        mCbWednesday.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
+                wedInt = 1;
+            }
+        });
+
+        mCbThursday.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
+                thursInt = 1;
+            }
+        });
+
+        mCbFriday.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
+                friInt = 1;
+            }
+        });
+
+        mCbSaturday.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
+                satInt = 1;
+            }
+        });
     }
 
     private void insertHabit() {
@@ -43,8 +100,12 @@ public class HabitCreator extends AppCompatActivity {
 
         String habitName = mHabitEditText.getText().toString().trim();
 
+        int habitDays = sunInt + monInt + tuesInt + wedInt + thursInt + friInt
+                        + satInt;
+
         ContentValues values = new ContentValues();
-        values.put(HabitContract.HabitEntry.COLUMN_HABIT_NAME, habitName);
+        values.put(HabitEntry.COLUMN_HABIT_NAME, habitName);
+        values.put(HabitEntry.COLUMN_DAYS, habitDays);
 
         long newRowID = db.insert(HabitEntry.TABLE_NAME, null, values);
 
