@@ -43,16 +43,17 @@ public class MainActivity extends AppCompatActivity {
         });
 
         mDbHelper = new HabitDbHelper(this);
-        displayDatabaseInfo();
+
+        setupDatabaseInfo();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        displayDatabaseInfo();
+        setupDatabaseInfo();
     }
 
-    private void displayDatabaseInfo() {
+    private Cursor setupDatabaseInfo() {
 
         SQLiteDatabase db = mDbHelper.getReadableDatabase();
 
@@ -72,9 +73,9 @@ public class MainActivity extends AppCompatActivity {
         TextView displayView = (TextView) findViewById(R.id.text_view_database_number);
 
         try {
-            displayView.setText("Number of rows in database table: " + cursor.getCount() + "\n\n");
+            displayView.setText("Number of rows in database table: " + cursor.getCount() + "\n\n\n");
             displayView.append(HabitEntry._ID + "   x   "
-                            + HabitEntry.COLUMN_HABIT_NAME + "   x   " + HabitEntry.COLUMN_DAYS);
+                    + HabitEntry.COLUMN_HABIT_NAME + "   x   " + HabitEntry.COLUMN_DAYS);
 
             count = cursor.getCount();
 
@@ -88,12 +89,13 @@ public class MainActivity extends AppCompatActivity {
                 int currentDayAmount = cursor.getInt(dayColumnIndex);
 
                 displayView.append("\n" + currentID + "   x   "
-                                    + currentName + "   x   " + currentDayAmount);
+                        + currentName + "   x   " + currentDayAmount);
             }
 
         } finally {
             cursor.close();
         }
+        return cursor;
     }
 
     /**
@@ -217,11 +219,11 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.action_insert_dummy_data:
                 dummyData();
-                displayDatabaseInfo();
+                setupDatabaseInfo();
                 return true;
             case R.id.action_delete:
                 delete();
-                displayDatabaseInfo();
+                setupDatabaseInfo();
                 return true;
         }
         return super.onOptionsItemSelected(item);
